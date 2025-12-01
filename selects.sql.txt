@@ -1,0 +1,26 @@
+-- LISTAR TODOS OS ALUNOS COM SEU PLANO
+SELECT a.nome, p.nome AS plano, p.valor_mensal
+FROM ALUNO a
+JOIN PLANO p ON a.id_plano = p.id_plano;
+
+-- CONSULTAR TREINOS DE UM ALUNO
+SELECT t.nome_treino, t.objetivo
+FROM TREINO t
+WHERE t.id_aluno = 1;
+
+-- RELATÓRIO DE AVALIAÇÕES COM INSTRUTOR
+SELECT a.nome AS aluno, i.nome AS instrutor, av.peso, av.altura, av.data_avaliacao
+FROM AVALIACAO_FISICA av
+JOIN ALUNO a ON av.id_aluno = a.id_aluno
+JOIN INSTRUTOR i ON av.id_instrutor = i.id_instrutor;
+
+-- AULAS COM INSTRUTOR RESPONSÁVEL
+SELECT ac.nome, ac.dia_semana, ac.horario, i.nome AS instrutor
+FROM AULA_COLETIVA ac
+JOIN INSTRUTOR i ON ac.id_instrutor = i.id_instrutor;
+
+-- LIMIT E ORDER BY
+SELECT nome, data_nascimento
+FROM ALUNO
+ORDER BY data_nascimento ASC
+LIMIT 1;
