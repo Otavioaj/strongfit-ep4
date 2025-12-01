@@ -1,0 +1,46 @@
+-- INSERINDO PLANOS
+INSERT INTO PLANO (id_plano, nome, valor_mensal, descricao) VALUES
+(1, 'Básico', 79.90, 'Acesso livre à academia'),
+(2, 'Premium', 129.90, 'Acesso a aulas coletivas e treinos personalizados');
+
+-- INSERINDO ALUNOS
+INSERT INTO ALUNO (id_aluno, nome, data_nascimento, telefone, email, id_plano) VALUES
+(1, 'Carlos Henrique', '1998-05-12', '11987654321', 'carlos@gmail.com', 1),
+(2, 'Ana Souza', '2001-03-22', '11999887766', 'ana@gmail.com', 2);
+
+-- INSERINDO INSTRUTORES
+INSERT INTO INSTRUTOR (id_instrutor, nome, especialidade, telefone) VALUES
+(1, 'Marcos Silva', 'Musculação', '11977778888'),
+(2, 'Juliana Ferreira', 'Funcional', '11966667777');
+
+-- INSERINDO AVALIAÇÕES FÍSICAS
+INSERT INTO AVALIACAO_FISICA (id_avaliacao, id_aluno, id_instrutor, peso, altura, imc, data_avaliacao) VALUES
+(1, 1, 1, 78.5, 1.80, 24.2, '2024-03-01'),
+(2, 2, 2, 62.0, 1.65, 22.8, '2024-03-05');
+
+-- INSERINDO TREINOS
+INSERT INTO TREINO (id_treino, id_aluno, id_instrutor, nome_treino, objetivo) VALUES
+(1, 1, 1, 'Treino A - Peito/Tríceps', 'Hipertrofia'),
+(2, 2, 2, 'Treino B - Pernas', 'Força');
+
+-- INSERINDO EXERCÍCIOS
+INSERT INTO EXERCICIO (id_exercicio, nome, grupo_muscular) VALUES
+(1, 'Supino reto', 'Peito'),
+(2, 'Tríceps na polia', 'Tríceps'),
+(3, 'Agachamento livre', 'Pernas');
+
+-- RELAÇÃO N:N TREINO_EXERCICIO
+INSERT INTO TREINO_EXERCICIO (id_treino, id_exercicio, series, repeticoes, carga) VALUES
+(1, 1, 4, 12, 50),
+(1, 2, 3, 15, 20),
+(2, 3, 5, 10, 40);
+
+-- AULAS COLETIVAS
+INSERT INTO AULA_COLETIVA (id_aula, nome, dia_semana, horario, id_instrutor) VALUES
+(1, 'Funcional', 'Segunda', '08:00:00', 2),
+(2, 'HIIT', 'Quarta', '19:00:00', 2);
+
+-- PRESENÇAS EM AULAS
+INSERT INTO PRESENCA_AULA (id_presenca, id_aula, id_aluno, data_presenca) VALUES
+(1, 1, 1, '2024-03-11'),
+(2, 2, 2, '2024-03-13');
