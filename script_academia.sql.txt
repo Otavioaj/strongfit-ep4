@@ -1,0 +1,88 @@
+-- ================================
+-- BANCO DE DADOS: ACADEMIA FITLIFE
+-- EP4 - CRIAÇÃO E MANIPULAÇÃO SQL
+-- ================================
+
+-- 1) CRIAÇÃO DAS TABELAS
+CREATE TABLE alunos (
+    id_aluno SERIAL PRIMARY KEY,
+    nome VARCHAR(100),
+    idade INT,
+    departamento VARCHAR(100)
+);
+
+CREATE TABLE cursos (
+    id_curso SERIAL PRIMARY KEY,
+    nome_curso VARCHAR(100),
+    carga_horaria INT
+);
+
+CREATE TABLE inscricoes (
+    id_inscricao SERIAL PRIMARY KEY,
+    id_aluno INT,
+    id_curso INT,
+    data_inscricao DATE,
+    FOREIGN KEY (id_aluno) REFERENCES alunos(id_aluno),
+    FOREIGN KEY (id_curso) REFERENCES cursos(id_curso)
+);
+
+-- =================================
+-- 2) INSERTS — POVOANDO O BANCO
+-- =================================
+INSERT INTO alunos (nome, idade, departamento) VALUES
+('João Silva', 22, 'Musculação'),
+('Maria Souza', 25, 'Crossfit'),
+('Carlos Lima', 30, 'Funcional'),
+('Ana Paula', 28, 'Pilates');
+
+INSERT INTO cursos (nome_curso, carga_horaria) VALUES
+('Musculação Intensiva', 40),
+('Crossfit Performance', 60),
+('Treinamento Funcional', 50),
+('Pilates Avançado', 45);
+
+INSERT INTO inscricoes (id_aluno, id_curso, data_inscricao) VALUES
+(1, 1, '2025-02-10'),
+(2, 2, '2025-02-12'),
+(3, 3, '2025-02-15'),
+(4, 4, '2025-02-17');
+
+-- =================================
+-- 3) CONSULTAS SELECT
+-- =================================
+
+-- Selecionar todos os alunos
+SELECT * FROM alunos;
+
+-- Selecionar cursos ordenados por carga horária
+SELECT * FROM cursos ORDER BY carga_horaria DESC;
+
+-- Selecionar inscrições com JOIN
+SELECT a.nome, c.nome_curso, i.data_inscricao
+FROM inscricoes i
+JOIN alunos a ON a.id_aluno = i.id_aluno
+JOIN cursos c ON c.id_curso = i.id_curso;
+
+-- Buscar alunos de departamento específico
+SELECT * FROM alunos WHERE departamento = 'Crossfit';
+
+-- Limitar alunos mais novos
+SELECT nome, idade FROM alunos ORDER BY idade ASC LIMIT 2;
+
+-- =================================
+-- 4) UPDATES
+-- =================================
+UPDATE alunos SET idade = 23 WHERE id_aluno = 1;
+UPDATE cursos SET carga_horaria = 65 WHERE id_curso = 2;
+UPDATE alunos SET departamento = 'Musculação' WHERE nome = 'Ana Paula';
+
+-- =================================
+-- 5) DELETES
+-- =================================
+DELETE FROM inscricoes WHERE id_inscricao = 1;
+DELETE FROM alunos WHERE id_aluno = 3;
+DELETE FROM cursos WHERE id_curso = 4;
+
+-- ================================
+-- FIM DO SCRIPT
+-- ================================
